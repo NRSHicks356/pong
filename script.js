@@ -10,8 +10,7 @@ let count1 = 0;
 let count2 = 0;
 let gameOver = false;
 let numbers = () => parseInt(score.options[score.selectedIndex].text);
-button1.addEventListener("click", function(e) {
-    numbers();
+button1.addEventListener("click", function() {
     if (!gameOver) {
         count1++;
     } else {
@@ -27,8 +26,7 @@ button1.addEventListener("click", function(e) {
     }
     span1.innerText = count1;
 });
-button2.addEventListener("click", function(e) {
-    numbers();
+button2.addEventListener("click", function() {
     if (!gameOver) {
         count2++;
     } else {
@@ -44,9 +42,10 @@ button2.addEventListener("click", function(e) {
     }
     span2.innerText = count2;
 });
+score.addEventListener("change", resetBtn);
+reset.addEventListener("click", resetBtn);
 
-reset.addEventListener("click", function(e) {
-    numbers();
+function resetBtn() {
     count1 = 0;
     count2 = 0;
     span1.innerText = count1;
@@ -57,4 +56,4 @@ reset.addEventListener("click", function(e) {
     span1.classList.remove("loser");
     button1.disabled = false;
     button2.disabled = false;
-});
+}
