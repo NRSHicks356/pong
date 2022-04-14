@@ -21,8 +21,8 @@ button1.addEventListener("click", function() {
     if (count1 === numbers()) {
         button1.disabled = true;
         button2.disabled = true;
-        span1.classList.add("winner");
-        span2.classList.add("loser");
+        span1.classList.add("has-text-success");
+        span2.classList.add("has-text-danger");
     }
     span1.innerText = count1;
 });
@@ -37,8 +37,8 @@ button2.addEventListener("click", function() {
     if (count2 === numbers()) {
         button1.disabled = true;
         button2.disabled = true;
-        span2.classList.add("winner");
-        span1.classList.add("loser");
+        span2.classList.add("has-text-success");
+        span1.classList.add("has-text-danger");
     }
     span2.innerText = count2;
 });
@@ -50,10 +50,8 @@ function resetBtn() {
     count2 = 0;
     span1.innerText = count1;
     span2.innerText = count2;
-    span2.classList.remove("winner");
-    span1.classList.remove("winner");
-    span2.classList.remove("loser");
-    span1.classList.remove("loser");
+    span2.classList.remove("has-text-success", "has-text-danger");
+    span1.classList.remove("has-text-success", "has-text-danger");
     button1.disabled = false;
     button2.disabled = false;
 }
