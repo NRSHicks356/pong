@@ -1,0 +1,9 @@
+html {
+    background-color: #272727;
+    color: #d6d6d6;
+    text-align: center;
+}
+
+.winner {
+    color: green;
+}
