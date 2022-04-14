@@ -1,57 +1,50 @@
-const buttons = document.querySelectorAll("button");
-const h1 = document.querySelector("h1");
-const score = document.querySelector("#score");
-const span1 = document.querySelector("#p1Score");
-const span2 = document.querySelector("#p2Score");
-const button1 = document.querySelector("#player1Button");
-const button2 = document.querySelector("#player2Button");
+const p1 = {
+    count: 0,
+    score: document.querySelector("#p1Score"),
+    button: document.querySelector("#player1Button"),
+};
+
+const p2 = {
+    count: 0,
+    score: document.querySelector("#p2Score"),
+    button: document.querySelector("#player2Button"),
+};
+
 const reset = document.querySelector("#resetButton");
-let count1 = 0;
-let count2 = 0;
 let gameOver = false;
 let numbers = () => parseInt(score.options[score.selectedIndex].text);
-button1.addEventListener("click", function() {
+
+function game(player, opponent) {
     if (!gameOver) {
-        count1++;
+        player.count++;
     } else {
-        button1.disabled = true;
-        button2.disabled = true;
+        player.button.disabled = true;
+        opponent.button.disabled = true;
     }
 
-    if (count1 === numbers()) {
-        button1.disabled = true;
-        button2.disabled = true;
-        span1.classList.add("has-text-success");
-        span2.classList.add("has-text-danger");
+    if (player.count === numbers()) {
+        player.button.disabled = true;
+        opponent.button.disabled = true;
+        player.score.classList.add("has-text-success");
+        opponent.score.classList.add("has-text-danger");
     }
-    span1.innerText = count1;
+    player.score.innerText = player.count;
+}
+p1.button.addEventListener("click", function() {
+    game(p1, p2);
 });
-button2.addEventListener("click", function() {
-    if (!gameOver) {
-        count2++;
-    } else {
-        button1.disabled = true;
-        button2.disabled = true;
-    }
+p2.button.addEventListener("click", function() {
+    game(p2, p1);
+});
 
-    if (count2 === numbers()) {
-        button1.disabled = true;
-        button2.disabled = true;
-        span2.classList.add("has-text-success");
-        span1.classList.add("has-text-danger");
-    }
-    span2.innerText = count2;
-});
 score.addEventListener("change", resetBtn);
 reset.addEventListener("click", resetBtn);
 
 function resetBtn() {
-    count1 = 0;
-    count2 = 0;
-    span1.innerText = count1;
-    span2.innerText = count2;
-    span2.classList.remove("has-text-success", "has-text-danger");
-    span1.classList.remove("has-text-success", "has-text-danger");
-    button1.disabled = false;
-    button2.disabled = false;
+    for (let p of[p1, p2]) {
+        p.count = 0;
+        p.score.innerText = p.count;
+        p.score.classList.remove("has-text-success", "has-text-danger");
+        p.button.disabled = false;
+    }
 }
